@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://database-1.cd6kxidf399v.ap-northeast-2.rds.amazonaws.com:3306/Restaurant_MSA?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
+    username: admin
+    password: xlavmfhwprxm123!
+# h2
+#    url: jdbc:h2:tcp://localhost/~/test
+#    driver-class-name: org.h2.Driver
+#    username: sa
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties.hibernate:
+      hbm2ddl.auto: none
+      format_sql: true
+    showSql: true
+    generate-ddl: false
+#    open-in-view: false
+#    hibernate:
+#      ddl-auto: none
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#      use-new-id-generator-mappings: false
+#    show-sql: true
+#    properties:
+#      hibernate.enable_lazy_load_no_trans: true
+
+# h2  
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    properties.hibernate.hbm2ddl.auto: update # 개발시 디비의 테이블과 비교하여 다른 부분만 크리에잇한다 
+#   #properties.hibernate.hbm2ddl.auto: none  # 서비스시 테이블 자동 생성될 수 없게 합니다.
+#    showSql: true
