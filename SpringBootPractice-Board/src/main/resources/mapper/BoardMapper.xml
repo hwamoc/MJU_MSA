@@ -5,19 +5,25 @@
 		
 <mapper namespace="mapper.BoardMapper">
 	<resultMap type="Post" id="Post">
-		<result property="post_index" column="post_index" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+		<result property="post_id" column="post_index" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="post_user_id" column="post_user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_title" column="post_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_content" column="post_content" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_created_date" column="post_created_date" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"/>
+		<result property="post_uptated_date" column="post_uptated_date" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"/>
 	</resultMap>
 	
-	<!-- 전체 메모 조회 -->
+	<!-- 전체 게시물 조회 -->
 	<select id="selectAllPost" resultMap="Post">
 	<![CDATA[
 		SELECT *
 		FROM post
 	]]>
 	</select>
-	
-	
+	<!-- 게시글 작성 -->
+	<insert id="createPost" parameterType="Post">
+	<![CDATA[
+		INSERT INTO `post`(`post_user_id`,`post_title`,`post_content`)VALUES (#{post_user_id},#{post_title},#{post_content});
+	]]>
+	</insert>
 </mapper>

@@ -19,4 +19,9 @@ public class BoardDAO {
 	}
 
 
+	public void createPost(Post newPost) {
+		sqlSessionTemplate.insert(MAPPER_NAME_SPACE + "createPost", newPost);
+	}
+
+
 }

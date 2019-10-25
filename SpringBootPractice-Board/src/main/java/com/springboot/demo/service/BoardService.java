@@ -16,4 +16,8 @@ public class BoardService {
 	public List<Post> selectAllPost() {
 		return boardDAO.selectAllPost();
 	}
+
+	public void createPost(Post newPost) {
+		boardDAO.createPost(newPost);
+	}
 }

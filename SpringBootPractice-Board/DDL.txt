@@ -1,10 +1,12 @@
 CREATE DATABASE `Board_MSA` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 
 CREATE TABLE `post` (
-  `post_id` int(11) NOT NULL,
-  `post_title` varchar(45) DEFAULT NULL,
-  `post_content` varchar(500) DEFAULT NULL,
-  `post_created_date` timestamp NULL DEFAULT NULL,
+  `post_id` int(11) NOT NULL AUTO INCREMENT,
+  `post_user_id` varchar(20) NOT NULL,
+  `post_title` varchar(45) NOT NULL,
+  `post_content` varchar(500) NOT NULL,
+  `post_created_date` timestamp not null DEFAULT_GENERATED,
+  `post_updated_date` timestamp not null DEFAULT_GENERATED,
   PRIMARY KEY (`post_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

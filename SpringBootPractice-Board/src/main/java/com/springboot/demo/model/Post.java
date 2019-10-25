@@ -3,16 +3,14 @@ package com.springboot.demo.model;
 import java.time.LocalDateTime;
 
 public class Post {
-	private int post_index;
+	private String post_id;
 	private String post_title;
+	private String post_user_id;
 	private String post_content;
 	private LocalDateTime post_created_date;
-	public int getPost_index() {
-		return post_index;
-	}
-	public void setPost_index(int post_index) {
-		this.post_index = post_index;
-	}
+	private LocalDateTime post_updated_date;
+	
+	
 	public String getPost_title() {
 		return post_title;
 	}
@@ -30,6 +28,24 @@ public class Post {
 	}
 	public void setPost_created_date(LocalDateTime post_created_date) {
 		this.post_created_date = post_created_date;
+	}
+	public String getPost_user_id() {
+		return post_user_id;
+	}
+	public void setPost_user_id(String post_user_id) {
+		this.post_user_id = post_user_id;
+	}
+	public String getPost_id() {
+		return post_id;
+	}
+	public void setPost_id(String post_id) {
+		this.post_id = post_id;
+	}
+	public LocalDateTime getPost_updated_date() {
+		return post_updated_date;
+	}
+	public void setPost_updated_date(LocalDateTime post_updated_date) {
+		this.post_updated_date = post_updated_date;
 	}
 	
 	
