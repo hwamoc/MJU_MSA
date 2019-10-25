@@ -28,6 +28,7 @@ public class BoardController {
 			logger.info("selectAllPost()");
 			List<Post> postList = boardService.selectAllPost();
 			ResponseEntity<List<Post>> responseEntity = new ResponseEntity<List<Post>> (postList,HttpStatus.OK);
+			
 			return responseEntity;
 		}
 		//게시글작성
