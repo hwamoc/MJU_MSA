@@ -1,7 +1,13 @@
 server:
   port: 8080
-  
+
 spring:
+  application:
+    name: restaurant-service
+  cloud:
+    inetutils:
+      default-hostname: restaurant-service
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://database-1.cd6kxidf399v.ap-northeast-2.rds.amazonaws.com:3306/Restaurant_MSA?useUnicode=yes&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Seoul
@@ -19,17 +25,19 @@ spring:
     showSql: true
     generate-ddl: false
 
-  application:
-    name: restaurant-service
-    
 eureka: 
   client:
     serviceUrl:
       defaultZone: http://52.78.148.181:9090/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+    enable-self-preservation: true
+    
   # change private ip to public ip address
   instance:
     prefer-ip-address: true
     ip-address: 13.209.77.33
+    
 
 # h2  
 #    database-platform: org.hibernate.dialect.H2Dialect
