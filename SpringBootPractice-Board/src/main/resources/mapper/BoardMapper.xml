@@ -5,7 +5,7 @@
 		
 <mapper namespace="mapper.BoardMapper">
 	<resultMap type="Post" id="Post">
-		<result property="post_id" column="post_index" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="post_id" column="post_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
 		<result property="post_user_id" column="post_user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_title" column="post_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_content" column="post_content" javaType="java.lang.String" jdbcType="VARCHAR"/>
