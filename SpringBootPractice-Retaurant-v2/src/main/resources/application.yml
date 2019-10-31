@@ -29,7 +29,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://52.78.148.181:9090/eureka/
-    register-with-eureka: false
+    register-with-eureka: true
     fetch-registry: false
     enable-self-preservation: true
     

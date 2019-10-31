@@ -2,7 +2,7 @@ CREATE DATABASE `Restaurant_MSA` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE 
 
 
 CREATE TABLE `restaurant` (
-  `res_index` int(11) NOT NULL,
+  `res_index` int(11) NOT NULL  AUTO_INCREMENT ,
   `res_name` varchar(45) DEFAULT NULL,
   `res_category` varchar(45) DEFAULT NULL,
   `res_grade` int(11) DEFAULT NULL,
