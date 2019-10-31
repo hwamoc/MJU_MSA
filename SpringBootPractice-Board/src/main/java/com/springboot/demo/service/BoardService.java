@@ -3,7 +3,6 @@ package com.springboot.demo.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.springboot.demo.model.BoardDAO;
@@ -24,6 +23,15 @@ public class BoardService {
 
 	public Post selectOneboard(Integer id) {
 		return boardDAO.selectOnePost(id);
+	}
+
+	public void postUpdate(Post postUpdate) {
+		boardDAO.postUpdate(postUpdate);
+		
+	}
+
+	public void deletePost(Integer id) {
+		boardDAO.deletePost(id);
 	}
 
 }

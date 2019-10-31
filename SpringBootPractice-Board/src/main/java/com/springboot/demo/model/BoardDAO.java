@@ -30,4 +30,14 @@ public class BoardDAO {
 	}
 
 
+	public void postUpdate(Post postUpdate) {
+		sqlSessionTemplate.update(MAPPER_NAME_SPACE + "updatePost",postUpdate);
+	}
+
+
+	public void deletePost(Integer id) {
+		 sqlSessionTemplate.delete(MAPPER_NAME_SPACE + "deletePost", id) ;
+	}
+
+
 }
