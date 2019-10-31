@@ -40,7 +40,7 @@ public class UserCotroller {
 	      UserVO member = mUserService.login(user);
 	      ResponseEntity<UserVO> reponseEntity = null;
 	      if (member != null) {
-	         reponseEntity = new ResponseEntity(member.getUser_id(), HttpStatus.OK);
+	         reponseEntity = new ResponseEntity<UserVO>(member, HttpStatus.OK);
 	         System.out.println(reponseEntity);
 	         return reponseEntity;
 	      } else {
