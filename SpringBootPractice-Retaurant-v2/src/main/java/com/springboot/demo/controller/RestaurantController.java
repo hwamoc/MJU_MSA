@@ -49,18 +49,18 @@ public class RestaurantController {
 	}
 	
 
-//	@ApiOperation(value = "식당 하나 조회", notes = "res_index로 식당을 조회한다")
+	@ApiOperation(value = "식당 하나 조회", notes = "res_index로 식당을 조회한다")
 	@GetMapping(value = "/restaurant/{res_index}")
-//	public ResponseEntity<Restaurant> findUserById(
-//			@ApiParam(value = "식당ID", required = true) @PathVariable int res_index) {
+	public ResponseEntity<Restaurant> findUserById(
+			@ApiParam(value = "식당ID", required = true) @PathVariable int res_index) {
 		// 결과데이터가 단일건인경우 getBasicResult를 이용해서 결과를 출력한다.
 //		SingleResult<Restaurant> singleResult = responseService.getSingleResult(restaurantJpaRepo.findById(res_index).orElse(null));
 //		Gson gson = new Gson(); // Gson 사용
 //	    return gson.toJson(singleResult); // json으로 변환 후, 리턴
 		
-//		Restaurant restaurant = restaurantJpaRepo.findById(res_index);
-//		return new ResponseEntity<Restaurant>(restaurant, HttpStatus.OK);
-//	}
+		Restaurant restaurant = restaurantJpaRepo.getOne(res_index);
+		return new ResponseEntity<Restaurant>(restaurant, HttpStatus.OK);
+	}
 	
 	@ApiOperation(value = "식당 입력", notes = "식당을 입력한다.")
 	@PostMapping(value = "/restaurant")
