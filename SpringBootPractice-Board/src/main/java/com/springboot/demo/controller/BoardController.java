@@ -39,7 +39,7 @@ public class BoardController {
 			return responseEntity;
 		}
 		//게시글작성
-		@RequestMapping(value="/post-new", method=RequestMethod.POST)
+		@RequestMapping(value="/post", method=RequestMethod.POST)
 		public ResponseEntity<Post> postNew(RequestEntity<Post> request) {
 			
 			logger.info("postNew()");
@@ -51,10 +51,10 @@ public class BoardController {
 		}
 		//게시글 자세히보기
 		@ApiOperation(value = "게시글 자세히보기", notes = "선택한 게시글을 조회한다")
-		@RequestMapping(value="/post-detail/{post_id}", method=RequestMethod.GET)
-		public ResponseEntity<List<Post>> selectOnePost(@PathVariable("post_id") Integer id) {
-			List<Post> postOne = boardService.selectOneboard(id);
-			ResponseEntity<List<Post>> responseEntity = new ResponseEntity<List<Post>> (postOne,HttpStatus.OK);
+		@RequestMapping(value="/posts/{post_id}", method=RequestMethod.GET)
+		public ResponseEntity<Post> selectOnePost(@PathVariable("post_id") Integer id) {
+			Post postOne = boardService.selectOneboard(id);
+			ResponseEntity<Post> responseEntity = new ResponseEntity<Post> (postOne,HttpStatus.OK);
 			return responseEntity;
 		}
 	}

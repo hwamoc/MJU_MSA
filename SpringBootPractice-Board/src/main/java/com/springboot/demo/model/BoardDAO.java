@@ -25,8 +25,8 @@ public class BoardDAO {
 	}
 
 
-	public List<Post> selectOnePost() {
-		return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectOnePost");
+	public Post selectOnePost(Integer id) {
+		return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectOnePost", id);
 	}
 
 

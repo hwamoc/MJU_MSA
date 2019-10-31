@@ -27,7 +27,7 @@
 	]]>
 	</insert>
 	<!-- 게시글 자세히 보기 -->
-	<select id="selectOnePost" resultType="Post" parameterType = "Post" >
+	<select id="selectOnePost" resultType="Post" parameterType = "Integer" >
 	<![CDATA[
 	   	SELECT * FROM post WHERE post_id = #{post_id};
 	]]>

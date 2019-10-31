@@ -22,8 +22,8 @@ public class BoardService {
 		boardDAO.createPost(newPost);
 	}
 
-	public List<Post> selectOneboard(Integer id) {
-		return boardDAO.selectOnePost();
+	public Post selectOneboard(Integer id) {
+		return boardDAO.selectOnePost(id);
 	}
 
 }
