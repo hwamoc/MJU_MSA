@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,6 +22,11 @@ public class BoardDAO {
 
 	public void createPost(Post newPost) {
 		sqlSessionTemplate.insert(MAPPER_NAME_SPACE + "createPost", newPost);
+	}
+
+
+	public List<Post> selectOnePost() {
+		return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectOnePost");
 	}
 
 

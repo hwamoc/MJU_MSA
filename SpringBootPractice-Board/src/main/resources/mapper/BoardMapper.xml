@@ -26,4 +26,10 @@
 		INSERT INTO `post`(`post_user_id`,`post_title`,`post_content`)VALUES (#{post_user_id},#{post_title},#{post_content});
 	]]>
 	</insert>
+	<!-- 게시글 자세히 보기 -->
+	<select id="selectOnePost" resultType="Post" parameterType = "Post" >
+	<![CDATA[
+	   	SELECT * FROM post WHERE post_id = #{post_id};
+	]]>
+	</select>
 </mapper>
