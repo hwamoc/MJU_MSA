@@ -35,11 +35,9 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public void check_id(String id, HttpServletResponse response) throws Exception {
-		PrintWriter out = response.getWriter();
-		out.println(mUserDAO.check_id(id));
-		out.close();
-	}
+	   public int check_id(String user_id) throws Exception {
+	      return mUserDAO.check_id(user_id);
+	   }
 	
 	@Override
 	public void logout(HttpServletResponse response) throws Exception{
@@ -63,4 +61,16 @@ public class UserServiceImpl implements UserService{
 		mUserDAO.userInsert(user);
 	}
 
+	public UserVO userSelectService(String user_id) {
+
+		return mUserDAO.userSelect(user_id);
+	}
+
+	public void userModifyService(UserVO member) {
+
+		mUserDAO.userModify(member);;
+	}
+
+	
+	
 }
