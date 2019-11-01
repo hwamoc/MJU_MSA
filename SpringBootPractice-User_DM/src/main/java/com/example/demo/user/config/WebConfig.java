@@ -32,7 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
 	   @Override
 	   public void addCorsMappings(CorsRegistry registry) {
 	      registry.addMapping("/**")
-	            .allowedOrigins("http://localhost:8080","http://52.78.148.181:8080", "http://13.125.99.51:8080"); // 로컬, 실서버 도메인 등록
+	            .allowedOrigins("http://localhost:8080","http://52.78.148.181:8080", "http://13.125.99.51:8080", "http://52.78.148.181:9090"); // 로컬, 실서버 도메인 등록
 	   }
 
 }
