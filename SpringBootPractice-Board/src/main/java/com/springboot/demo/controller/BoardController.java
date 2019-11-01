@@ -42,22 +42,15 @@ public class BoardController {
 		//게시글작성
 		@ApiOperation(value = "게시글 작성", notes = "게시글을 작성한다")
 		@RequestMapping(value="/post", method=RequestMethod.POST)
-		public ResponseEntity<Post> postNew(
-				@ApiParam @RequestParam("post_title") String post_title,
-				@ApiParam @RequestParam("post_user_id") String post_user_id,
-				@ApiParam @RequestParam("post_content")String post_content) {
-				Post newPost = new Post();
-				newPost.setPost_title(post_title);
-				newPost.setPost_user_id(post_user_id);
-				newPost.setPost_content(post_content);
-			
+		public ResponseEntity<Post> postNew(@RequestBody Post postNew) {
+				
 			logger.info("postNew()");
-			boardService.createPost(newPost);
-			ResponseEntity<Post> response = new ResponseEntity<Post>(newPost,HttpStatus.OK);
+			boardService.createPost(postNew);
+			ResponseEntity<Post> response = new ResponseEntity<Post>(postNew,HttpStatus.OK);
 			return response;
 		}
 		//게시글 자세히보기
-		@ApiOperation(value = "게시글 자세히보기", notes = "선택한 게시글을 조회한다")
+		@ApiOperation(value = "게시글 상세조회", notes = "선택한 게시글을 조회한다")
 		@RequestMapping(value="/posts/{post_id}", method=RequestMethod.GET)
 		public ResponseEntity<Post> selectOnePost(@PathVariable("post_id") Integer id) {
 			logger.info("selectOnePost()");
@@ -67,6 +60,7 @@ public class BoardController {
 			return responseEntity;
 		}
 		//게시글 수정
+		@ApiOperation(value = "게시글 수정", notes = "게시글을 수정한다")
 		@RequestMapping(value="/posts/{post_id}", method=RequestMethod.PUT)
 		public ResponseEntity<Post> postUpdate(@PathVariable("post_id") Integer id,@RequestBody Post postUpdate) {
 			logger.info("postUpdate()");
@@ -78,6 +72,7 @@ public class BoardController {
 			return response;
 		}
 		//게시글 삭제
+		@ApiOperation(value = "게시글 삭제", notes = "게시글을 지운다")
 		@RequestMapping(value="/posts/{post_id}", method=RequestMethod.DELETE)
 		public void postDelete(@PathVariable("post_id") Integer id) {
 			logger.info("postDelete()");

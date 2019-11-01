@@ -25,7 +25,7 @@
 	<insert id="createPost" parameterType="Post">
 	<![CDATA[
 		INSERT INTO post(post_user_id,post_title,post_content)VALUES (#{post_user_id},#{post_title},#{post_content});
-		SET @CNT = 0; 
+	 	SET @CNT = 0; 
 	 	UPDATE post SET post.post_id = @CNT:=@CNT+1;
 	]]>
 	</insert>
@@ -50,5 +50,7 @@
 	<!-- 게시글 삭제 -->
 	<delete id = "deletePost" parameterType = "Integer">
 	 DELETE FROM post WHERE post_id = #{post_id};
+	 SET @CNT = 0; 
+	 UPDATE post SET post.post_id = @CNT:=@CNT+1;
 	</delete>
 </mapper>
