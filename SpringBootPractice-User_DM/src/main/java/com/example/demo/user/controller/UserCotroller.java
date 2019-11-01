@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,9 +35,12 @@ public class UserCotroller {
 	// 로그인
 	@ApiOperation(value = "로그인", notes = "아이디, 비밀번호를 입력받아 로그인 한다.")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<UserVO> login(RequestEntity<UserVO> request) throws Exception {
+	public ResponseEntity<UserVO> login(
+			@ApiParam(value = "아이디, 비밀번호", required = true) @RequestBody UserVO user
+			) throws Exception {
 
-		UserVO user = (UserVO) request.getBody();
+		
+		
 		UserVO member = mUserService.login(user);
 		ResponseEntity<UserVO> reponseEntity = null;
 		if (member != null) {
@@ -53,9 +57,11 @@ public class UserCotroller {
 	// 회원가입
 	@ApiOperation(value = "회원가입", notes = "회원 정보를 입력받아 회원가입을 한다.")
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	private ResponseEntity<UserVO> userSignUpProc(RequestEntity<UserVO> request) throws Exception {
-
-		UserVO user = (UserVO) request.getBody();
+	private ResponseEntity<UserVO> userSignUpProc(
+			@ApiParam(value = "아이디, 비밀번호, 이름, 이메일", required = true) @RequestBody UserVO user
+			) throws Exception {
+		
+		//출력
 		System.out.println(user.getUser_id());
 		System.out.println(user.getUser_password());
 		System.out.println(user.getUser_email());
@@ -77,6 +83,16 @@ public class UserCotroller {
 		}
 
 	}
+	
+	 // ID 중복 검사
+	   @RequestMapping(value = "/check-id/{user_id}", method = RequestMethod.GET)
+	   public ResponseEntity<Integer> checkId(@PathVariable("user_id") String user_id) throws Exception {
+	      logger.info("checkId()");
+
+	      int result = mUserService.check_id(user_id);
+	      return new ResponseEntity<>(result, HttpStatus.OK);
+	   }
+	   
 
 	// 회원목록
 	@ApiOperation(value = "회원목록", notes = "회원목록을 보여준다.")
@@ -101,9 +117,9 @@ public class UserCotroller {
 	// 회원 정보 수정
 	@ApiOperation(value = "정보수정", notes = "회원정보를 수정한다.")
 	@RequestMapping(value = "/userinfo-edit", method = RequestMethod.PUT)
-	public ResponseEntity<UserVO> userModify(RequestEntity<UserVO> request) throws Exception {
+	public ResponseEntity<UserVO> userModify(
+			@ApiParam(value = "아이디, 비밀번호, 이름, 이메일", required = true) @RequestBody UserVO user) throws Exception {
 		logger.info("userModify()");
-		UserVO user = (UserVO) request.getBody();
 		mUserService.userModifyService(user);
 		ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
 		return reponseEntity;
