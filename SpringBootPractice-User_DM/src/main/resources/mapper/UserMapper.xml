@@ -81,7 +81,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		]]>
 	</select>
 	
-	
     <insert id="myresInsert"
     	parameterType="RestaurantVO">
 		<![CDATA[
@@ -91,34 +90,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{user_id}, #{res_name}, #{res_category}, #{res_grade}, #{res_expected_minutes});
 		]]>
 	</insert>
-
-
-	<!-- 이하 쓰이지 않는 코드(분석 목적으로 삭제 및 주석 처리하지 않음) -->
-	<select id="boardDetail" parameterType="int"
-		resultType="com.example.demo.user.model.UserVO">
-		SELECT *
-		FROM BOARD
-		WHERE BNO = #{bno}
-	</select>
-
-	<update id="boardUpdate"
-		parameterType="com.example.demo.user.model.UserVO">
-		UPDATE BOARD
-		SET
-		<if test="subject != null">
-			SUBJECT = #{subject}
-		</if>
-		<if test="subject != null and content != null"> , </if>
-		<if test="content != null">
-			CONTENT = #{content}
-		</if>
-		WHERE BNO = #{bno}
-	</update>
-
-	<delete id="boardDelete" parameterType="int">
-		DELETE FROM BOARD
-		WHERE
-		BNO = #{bno}
-	</delete>
 
 </mapper>
