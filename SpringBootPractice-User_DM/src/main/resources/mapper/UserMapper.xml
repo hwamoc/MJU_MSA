@@ -58,10 +58,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="userModify" parameterType="com.example.demo.user.model.UserVO" >
 	<![CDATA[
 		UPDATE user
-		SET user_id = #{user_id}, user_password = #{user_password}, user_name = #{user_name}, user_email = #{user_email}
+		SET user_id = user_id, user_password = #{user_password}, user_name = #{user_name}, user_email = #{user_email}
 		WHERE user.user_id = #{user_id}
 	]]>
     </update>
+    
+    <delete id="userDelete" parameterType="String">
+		DELETE 
+		FROM user
+		WHERE user.user_id = #{user_id}
+	</delete>
+    
+    
+    
+    <!-- my_restaurant -->
+	<select id="selectResById"
+		parameterType="String" resultType="com.example.demo.user.model.RestaurantVO">
+		<![CDATA[
+		SELECT *
+		FROM myrestaurant
+		WHERE user_id = #{user_id}
+		]]>
+	</select>
+	
+	
+    <insert id="myresInsert"
+    	parameterType="RestaurantVO">
+		<![CDATA[
+		INSERT INTO `User_MSA`.`myrestaurant`
+		(`user_id`,`res_name`,`res_category`,`res_grade`,`res_expected_minutes`)
+		VALUES
+		(#{user_id}, #{res_name}, #{res_category}, #{res_grade}, #{res_expected_minutes});
+		]]>
+	</insert>
+
 
 	<!-- 이하 쓰이지 않는 코드(분석 목적으로 삭제 및 주석 처리하지 않음) -->
 	<select id="boardDetail" parameterType="int"

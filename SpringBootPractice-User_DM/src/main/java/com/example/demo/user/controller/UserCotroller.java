@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.user.model.RestaurantVO;
 import com.example.demo.user.model.UserVO;
 import com.example.demo.user.service.UserServiceImpl;
 
@@ -109,6 +110,7 @@ public class UserCotroller {
 	@RequestMapping(value = "/userinfo/{user_id}", method = RequestMethod.GET)
 	public ResponseEntity<UserVO> selectUserById(
 			@ApiParam(value = "유저 아이디", required = true) @PathVariable String user_id) throws Exception {
+		logger.info("selectUserById()");
 		UserVO user = mUserService.userSelectService(user_id);
 		ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(user, HttpStatus.OK);
 		return reponseEntity;
@@ -118,13 +120,54 @@ public class UserCotroller {
 	@ApiOperation(value = "정보수정", notes = "회원정보를 수정한다.")
 	@RequestMapping(value = "/userinfo-edit", method = RequestMethod.PUT)
 	public ResponseEntity<UserVO> userModify(
-			@ApiParam(value = "아이디, 비밀번호, 이름, 이메일", required = true) @RequestBody UserVO user) throws Exception {
+			@ApiParam(value = "비밀번호, 이름, 이메일", required = true) @RequestBody UserVO user) throws Exception {
 		logger.info("userModify()");
 		mUserService.userModifyService(user);
 		ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
 		return reponseEntity;
 	}
-
+	
+	// 회원 정보 수정
+		@ApiOperation(value = "회원삭제", notes = "회원을 삭제한다.")
+		@RequestMapping(value = "/user-delete/{user_id}", method = RequestMethod.DELETE)
+		public ResponseEntity<UserVO> userDelete(
+				@ApiParam(value = "아이디", required = true) @PathVariable String user_id) throws Exception {
+			logger.info("userDelete()");
+			mUserService.userDeleteService(user_id);
+			ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
+			return reponseEntity;
+		}
+		
+	// 가고싶은 식당 조회
+		@ApiOperation(value = "내 식당 목록", notes = "내 식당을 보여준다.")
+		@RequestMapping(value = "/user/my-restaurants/{user_id}", method = RequestMethod.GET)
+		public ResponseEntity<List<RestaurantVO>> selectMyRes(
+				@ApiParam(value = "유저 아이디", required = true) @PathVariable String user_id) throws Exception {
+			logger.info("selectMyRes()");
+			List<RestaurantVO> myResList = mUserService.myResListService(user_id);
+			ResponseEntity<List<RestaurantVO>> reponseEntity = new ResponseEntity<List<RestaurantVO>>(myResList, HttpStatus.OK);
+			return reponseEntity;
+		}
+		
+		// 내 식당 추가
+		@ApiOperation(value = "내 식당 추가", notes = "내 식당을 추가한다.")
+		@RequestMapping(value = "/user/my-restarant-insert", method = RequestMethod.POST)
+		private void myResInsert(
+			@ApiParam(value = "유저아이디, 식당이름, 식당분류, 평점, 대기시간", required = true) @RequestBody RestaurantVO MyRes
+			) throws Exception {
+		
+			//출력
+			System.out.println(MyRes.getUser_id());
+			System.out.println(MyRes.getRes_name());
+			System.out.println(MyRes.getRes_category());
+			System.out.println(MyRes.getRes_grade());
+			System.out.println(MyRes.getRes_expected_minutes());
+			
+			mUserService.myresInsert(MyRes);
+			ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
+			System.out.println(reponseEntity);
+				
+		}
 	/**
 	 * 
 	 * Do not Delete For Studying code

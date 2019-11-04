@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.user.model.RestaurantVO;
 import com.example.demo.user.model.UserVO;
 
 @Service("com.example.demo.user.service.UserService")
@@ -16,6 +17,8 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	UserDAO mUserDAO;
+	@Autowired
+	ResDAO mResDAO;
 	
 	// 로그인
 	@Override
@@ -69,6 +72,19 @@ public class UserServiceImpl implements UserService{
 	public void userModifyService(UserVO member) {
 
 		mUserDAO.userModify(member);;
+	}
+
+	public void userDeleteService(String user_id) {
+		mUserDAO.userDelete(user_id);		
+	}
+
+	public List<RestaurantVO> myResListService(String user_id) {
+		return mResDAO.myResList(user_id);
+	}
+
+	public void myresInsert(RestaurantVO myRes) {
+		mResDAO.myResInsert(myRes);
+		
 	}
 
 	

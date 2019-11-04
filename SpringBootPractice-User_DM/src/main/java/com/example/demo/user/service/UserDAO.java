@@ -42,4 +42,8 @@ public class UserDAO {
 	public void userModify(UserVO user) {
 		sqlsession.update(MAPPER_NAME_SPACE + "userModify", user);
 	}
+
+	public void userDelete(String user_id) {
+		sqlsession.insert(MAPPER_NAME_SPACE + "userDelete", user_id);
+	}
 }
