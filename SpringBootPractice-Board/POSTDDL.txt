@@ -5,6 +5,7 @@ CREATE TABLE `post` (
   `post_user_id` varchar(20) NOT NULL,
   `post_title` varchar(45) NOT NULL,
   `post_content` varchar(500) NOT NULL,
+  `post_image` varchar(200) NOT NULL,
   `post_created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `post_updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`post_id`))

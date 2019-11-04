@@ -9,6 +9,7 @@
 		<result property="post_user_id" column="post_user_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_title" column="post_title" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_content" column="post_content" javaType="java.lang.String" jdbcType="VARCHAR"/>
+		<result property="post_image" column="post_image" javaType="java.lang.String" jdbcType="VARCHAR"/>
 		<result property="post_created_date" column="post_created_date" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"/>
 		<result property="post_uptated_date" column="post_uptated_date" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"/>
 	</resultMap>
@@ -24,7 +25,7 @@
 	<!-- 게시글 작성 -->
 	<insert id="createPost" parameterType="Post">
 	<![CDATA[
-		INSERT INTO post(post_user_id,post_title,post_content)VALUES (#{post_user_id},#{post_title},#{post_content});
+		INSERT INTO post(post_user_id,post_title,post_content,post_image)VALUES (#{post_user_id},#{post_title},#{post_content},#{post_image});
 	 	SET @CNT = 0; 
 	 	UPDATE post SET post.post_id = @CNT:=@CNT+1;
 	]]>
@@ -41,7 +42,7 @@
 	<update id="updatePost" parameterType = "Post" > 
 	<![CDATA[
       UPDATE post
-      SET post_id = #{post_id},post_user_id = #{post_user_id}, post_title = #{post_title},post_content=#{post_content},
+      SET post_id = #{post_id},post_user_id = #{post_user_id}, post_title = #{post_title},post_content=#{post_content},post_image=#{post_image},
       post_updated_date=#{post_updated_date},post_created_date = #{post_created_date}
       WHERE post_id = #{post_id}
  	  ]]>
