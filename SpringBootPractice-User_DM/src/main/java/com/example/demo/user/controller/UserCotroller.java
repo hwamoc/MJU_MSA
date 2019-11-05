@@ -85,14 +85,13 @@ public class UserCotroller {
 
 	}
 	
-	 // ID 중복 검사
-	   @RequestMapping(value = "/check-id/{user_id}", method = RequestMethod.GET)
-	   public ResponseEntity<Integer> checkId(@PathVariable("user_id") String user_id) throws Exception {
-	      logger.info("checkId()");
-
-	      int result = mUserService.check_id(user_id);
-	      return new ResponseEntity<>(result, HttpStatus.OK);
-	   }
+	// ID 중복 검사 (1105 변경; PathVariable -> RequestParam 수정; AJAX로 GET 방식 호출 시 강제로 쿼리 스트링 형태로 되므로 PathVariable을 사용할 수 없었음)
+	@RequestMapping(value = "/check-id", method = RequestMethod.GET)
+	public ResponseEntity<Integer> checkId(@RequestParam("user_id") String user_id) throws Exception {
+		logger.info("checkId(): {} ", user_id);
+		int result = mUserService.check_id(user_id);
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
 	   
 
 	// 회원목록
@@ -116,14 +115,13 @@ public class UserCotroller {
 		return reponseEntity;
 	}
 
-	// 회원 정보 수정
+	// 회원 정보 수정 (1105 변경; 수정된 계정 정보를 세션에 반영하기 위해 응답에 user 전달)
 	@ApiOperation(value = "정보수정", notes = "회원정보를 수정한다.")
 	@RequestMapping(value = "/userinfo-edit", method = RequestMethod.PUT)
-	public ResponseEntity<UserVO> userModify(
-			@ApiParam(value = "비밀번호, 이름, 이메일", required = true) @RequestBody UserVO user) throws Exception {
+	public ResponseEntity<UserVO> userModify(@ApiParam(value = "아이디, 비밀번호, 이름, 이메일", required = true) @RequestBody UserVO user) throws Exception {
 		logger.info("userModify()");
 		mUserService.userModifyService(user);
-		ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
+		ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(user, HttpStatus.OK);
 		return reponseEntity;
 	}
 	
