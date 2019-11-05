@@ -43,7 +43,7 @@
 	<![CDATA[
       UPDATE post
       SET post_id = #{post_id},post_user_id = #{post_user_id}, post_title = #{post_title},post_content=#{post_content},post_image=#{post_image},
-      post_updated_date=#{post_updated_date},post_created_date = #{post_created_date}
+      post_updated_date= now()
       WHERE post_id = #{post_id}
  	  ]]>
 	</update>
