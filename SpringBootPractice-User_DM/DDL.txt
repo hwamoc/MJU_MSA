@@ -23,27 +23,21 @@ VALUES('doming', 'dmongmin', '김동민', 'dongminrotc@naver.com');
 /////////////////////////////////////////////////////////////////////////////////
 
 CREATE TABLE `myrestaurant` (
-  `index` int(11) NOT NULL  AUTO_INCREMENT ,
-  `user_id` varchar(45) DEFAULT NULL,
-  `res_name` varchar(45) DEFAULT NULL,
-  `res_category` varchar(45) DEFAULT NULL,
-  `res_grade` int(11) DEFAULT NULL,
-  `res_expected_minutes` int(11) DEFAULT NULL,
-  PRIMARY KEY (`index`)
+  `user_id` varchar(45) NOT NULL,
+  `res_index` int(11) NOT NULL,
+  CONSTRAINT `myres_pk` PRIMARY KEY (`user_id`,`res_index`),
+  CONSTRAINT `myres_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `User_MSA`.`myrestaurant`
-(`index`,`user_id`,`res_name`,`res_category`,`res_grade`,`res_expected_minutes`)
-VALUES(1,'admin1','금정가든', '한식', null ,5);
+(`user_id`,`res_index`)
+VALUES('seungho',1);
 
 INSERT INTO `User_MSA`.`myrestaurant`
-(`index`,`user_id`,`res_name`,`res_category`,`res_grade`,`res_expected_minutes`)
-VALUES(2,'admin1','짜우반점', '중식', null ,4);
+(`user_id`,`res_index`)
+VALUES('seungho',2);
 
 INSERT INTO `User_MSA`.`myrestaurant`
-(`index`,`user_id`,`res_name`,`res_category`,`res_grade`,`res_expected_minutes`)
-VALUES(3,'admin1','주인백', '양식', null ,6);
+(`user_id`,`res_index`)
+VALUES('doming',2);
 
-INSERT INTO `User_MSA`.`myrestaurant`
-(`index`,`user_id`,`res_name`,`res_category`,`res_grade`,`res_expected_minutes`)
-VALUES(4,'devsjh','베가보쌈', '한식', null ,3);

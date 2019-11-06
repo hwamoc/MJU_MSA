@@ -75,9 +75,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectResById"
 		parameterType="String" resultType="com.example.demo.user.model.RestaurantVO">
 		<![CDATA[
-		SELECT *
-		FROM myrestaurant
-		WHERE user_id = #{user_id}
+		SELECT user.user_id, myrestaurant.res_index
+		FROM user, myrestaurant
+		WHERE user.user_id = #{user_id} and user.user_id = myrestaurant.user_id
 		]]>
 	</select>
 	
@@ -85,9 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	parameterType="RestaurantVO">
 		<![CDATA[
 		INSERT INTO `User_MSA`.`myrestaurant`
-		(`user_id`,`res_name`,`res_category`,`res_grade`,`res_expected_minutes`)
+		(`user_id`,`res_index`)
 		VALUES
-		(#{user_id}, #{res_name}, #{res_category}, #{res_grade}, #{res_expected_minutes});
+		(#{user_id}, #{res_index});
 		]]>
 	</insert>
 

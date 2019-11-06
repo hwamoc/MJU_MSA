@@ -151,15 +151,12 @@ public class UserCotroller {
 		@ApiOperation(value = "내 식당 추가", notes = "내 식당을 추가한다.")
 		@RequestMapping(value = "/user/my-restarant-insert", method = RequestMethod.POST)
 		private void myResInsert(
-			@ApiParam(value = "유저아이디, 식당이름, 식당분류, 평점, 대기시간", required = true) @RequestBody RestaurantVO MyRes
+			@ApiParam(value = "식당번호(res_index)", required = true) @RequestBody RestaurantVO MyRes
 			) throws Exception {
 		
 			//출력
 			System.out.println(MyRes.getUser_id());
-			System.out.println(MyRes.getRes_name());
-			System.out.println(MyRes.getRes_category());
-			System.out.println(MyRes.getRes_grade());
-			System.out.println(MyRes.getRes_expected_minutes());
+			System.out.println(MyRes.getRes_index());
 			
 			mUserService.myresInsert(MyRes);
 			ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
