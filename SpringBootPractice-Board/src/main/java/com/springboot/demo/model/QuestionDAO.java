@@ -21,7 +21,7 @@ public class QuestionDAO {
 	}
 
 	public Question selectOneQuestion(Integer id) {
-		return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectOneQuestion");
+		return sqlSessionTemplate.selectOne(MAPPER_NAME_SPACE + "selectOneQuestion",id);
 	}
 
 	public void answer(Question answer) {
