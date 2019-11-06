@@ -2,7 +2,6 @@ package com.springboot.demo.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.gson.Gson;
 import com.springboot.demo.entity.Restaurant;
 import com.springboot.demo.model.response.CommonResult;
-import com.springboot.demo.model.response.SingleResult;
 import com.springboot.demo.repo.RestaurantJpaRepo;
 import com.springboot.demo.service.ResponseService;
 
@@ -28,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 
-@Api(tags = { "1. Restaurant" })
+@Api(tags = { "1-1. Restaurant" })
 @RequiredArgsConstructor
 @RestController // 결과값을 JSON으로 출력합니다.
 @RequestMapping(value = "/")
@@ -85,7 +81,7 @@ public class RestaurantController {
 	
 	@ApiOperation(value = "식당 수정", notes = "식당 정보를 수정한다")
     @PutMapping(value = "/restaurant/{res_index}")
-    public ResponseEntity<Restaurant> modify(
+    public ResponseEntity<Restaurant> modify(@ApiParam(value = "식당 아이디", required = true) @PathVariable int res_index, 
 //    		@ApiParam(value = "식당 이름", required = true) @RequestParam String res_name,
 //			@ApiParam(value = "식당 종류", required = true) @RequestParam String res_category,
 //			@ApiParam(value = "식당 별점", required = false) @RequestParam Integer res_grade,
@@ -99,7 +95,13 @@ public class RestaurantController {
 //				.build();
 		
 //		return responseService.getSingleResult(restaurantJpaRepo.save(restaurant));
-		Restaurant modifiedRestaurant = restaurantJpaRepo.save(restaurant);
+		Restaurant modifiedRestaurant = restaurantJpaRepo.getOne(res_index);
+		modifiedRestaurant.setRes_name(restaurant.getRes_name());
+		modifiedRestaurant.setRes_category(restaurant.getRes_category());
+		modifiedRestaurant.setRes_grade(restaurant.getRes_grade());
+		modifiedRestaurant.setRes_expected_minutes(restaurant.getRes_expected_minutes());
+		modifiedRestaurant.setRes_menues(restaurant.getRes_menues());
+		
 		return new ResponseEntity<Restaurant>(modifiedRestaurant, HttpStatus.OK);
     }
 	
