@@ -58,7 +58,7 @@ public class GradeController {
 //	}
 	
 	@ApiOperation(value = "평점 입력", notes = "평점을 입력한다.")
-	@PostMapping(value = "/restaurant/{res_index}/grade")
+	@PostMapping(value = "/{res_index}/grade")
 	public ResponseEntity<Grade> save(@ApiParam(value = "식당 아이디", required = true) @PathVariable int res_index,
 			@RequestBody Grade grade
 			) throws UnsupportedEncodingException {
@@ -68,7 +68,7 @@ public class GradeController {
 	}
 	
 	@ApiOperation(value = "평점 수정", notes = "식당 평점을 수정한다")
-    @PutMapping(value = "/restaurant/{res_index}/grade/{grade_id}")
+    @PutMapping(value = "/{res_index}/grade/{grade_id}")
     public ResponseEntity<Grade> modify(@ApiParam(value = "식당 아이디", required = true) @PathVariable int res_index,
     		@ApiParam(value = "평점 아이디", required = true) @PathVariable int grade_id,
     		@RequestBody Grade grade) throws UnsupportedEncodingException {
@@ -80,7 +80,7 @@ public class GradeController {
     }
 	
 	@ApiOperation(value = "평점 삭제", notes = "grade_id로 평 정보를 삭제한다")
-	@DeleteMapping(value = "/restaurant/{res_index}/grade/{grade_id}")
+	@DeleteMapping(value = "/{res_index}/grade/{grade_id}")
 	public CommonResult delete(@ApiParam(value = "식당 아이디", required = true) @PathVariable int res_index,
 			@ApiParam(value = "평점 아이디", required = true) @PathVariable int grade_id) {
 		gradeJpaRepo.deleteById(grade_id);
