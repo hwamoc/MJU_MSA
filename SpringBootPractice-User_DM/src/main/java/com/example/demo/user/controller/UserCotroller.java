@@ -149,7 +149,7 @@ public class UserCotroller {
 		
 		// 내 식당 추가
 		@ApiOperation(value = "내 식당 추가", notes = "내 식당을 추가한다.")
-		@RequestMapping(value = "/user/my-restarant-insert", method = RequestMethod.POST)
+		@RequestMapping(value = "/user/my-restaurant-insert", method = RequestMethod.POST)
 		private void myResInsert(
 			@ApiParam(value = "식당번호(res_index)", required = true) @RequestBody RestaurantVO MyRes
 			) throws Exception {
