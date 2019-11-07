@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.user.model.RestaurantVO;
+import com.example.demo.user.model.MyRestaurantVO;
 import com.example.demo.user.model.UserVO;
 
 @Service("com.example.demo.user.service.UserService")
@@ -78,11 +78,11 @@ public class UserServiceImpl implements UserService{
 		mUserDAO.userDelete(user_id);		
 	}
 
-	public List<RestaurantVO> myResListService(String user_id) {
+	public List<MyRestaurantVO> myResListService(String user_id) {
 		return mResDAO.myResList(user_id);
 	}
 
-	public void myresInsert(RestaurantVO myRes) {
+	public void myresInsert(MyRestaurantVO myRes) {
 		mResDAO.myResInsert(myRes);
 		
 	}

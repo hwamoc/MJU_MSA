@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.user.model.RestaurantVO;
+import com.example.demo.user.model.MyRestaurantVO;
 import com.example.demo.user.model.UserVO;
 import com.example.demo.user.service.UserServiceImpl;
 
@@ -139,11 +139,11 @@ public class UserCotroller {
 	// 가고싶은 식당 조회
 		@ApiOperation(value = "내 식당 목록", notes = "내 식당을 보여준다.")
 		@RequestMapping(value = "/user/my-restaurants/{user_id}", method = RequestMethod.GET)
-		public ResponseEntity<List<RestaurantVO>> selectMyRes(
+		public ResponseEntity<List<MyRestaurantVO>> selectMyRes(
 				@ApiParam(value = "유저 아이디", required = true) @PathVariable String user_id) throws Exception {
 			logger.info("selectMyRes()");
-			List<RestaurantVO> myResList = mUserService.myResListService(user_id);
-			ResponseEntity<List<RestaurantVO>> reponseEntity = new ResponseEntity<List<RestaurantVO>>(myResList, HttpStatus.OK);
+			List<MyRestaurantVO> myResList = mUserService.myResListService(user_id);
+			ResponseEntity<List<MyRestaurantVO>> reponseEntity = new ResponseEntity<List<MyRestaurantVO>>(myResList, HttpStatus.OK);
 			return reponseEntity;
 		}
 		
@@ -151,7 +151,7 @@ public class UserCotroller {
 		@ApiOperation(value = "내 식당 추가", notes = "내 식당을 추가한다.")
 		@RequestMapping(value = "/user/my-restaurant-insert", method = RequestMethod.POST)
 		private void myResInsert(
-			@ApiParam(value = "식당번호(res_index)", required = true) @RequestBody RestaurantVO MyRes
+			@ApiParam(value = "식당번호(res_index)", required = true) @RequestBody MyRestaurantVO MyRes
 			) throws Exception {
 		
 			//출력
@@ -159,7 +159,7 @@ public class UserCotroller {
 			System.out.println(MyRes.getRes_index());
 			
 			mUserService.myresInsert(MyRes);
-			ResponseEntity<UserVO> reponseEntity = new ResponseEntity<UserVO>(HttpStatus.OK);
+			ResponseEntity<MyRestaurantVO> reponseEntity = new ResponseEntity<MyRestaurantVO>(HttpStatus.OK);
 			System.out.println(reponseEntity);
 				
 		}

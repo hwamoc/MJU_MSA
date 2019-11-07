@@ -1,6 +1,6 @@
 package com.example.demo.user.model;
 
-public class RestaurantVO {
+public class MyRestaurantVO {
 	String user_id;
 	int res_index;
 	
