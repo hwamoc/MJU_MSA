@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <head>
-    <link href="/resources/css/users/joinAndLogin.css" rel="stylesheet">
+    <link href="/resources/css/users/joinAndLogin.css?v=<%=System.currentTimeMillis() %>" rel="stylesheet">
     <title>명지리본: 계정 탈퇴</title>
 </head>
 

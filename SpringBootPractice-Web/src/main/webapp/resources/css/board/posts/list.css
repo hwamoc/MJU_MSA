@@ -23,8 +23,8 @@
     /*background-color: rgba(0,0,0,0.2);*/
     /*opacity: 1;*/
     /*box-shadow: 0 3px 20px 11px rgba(0, 0, 0, 0.09);*/
-    -webkit-filter: blur(1px) brightness(0.8);  /* Chrome, Safari, Opera */
-    filter: blur(1px) brightness(0.8);
+    -webkit-filter: blur(0.03rem) brightness(0.8);  /* Chrome, Safari, Opera */
+    filter: blur(0.03rem) brightness(0.8);
 }
 #postListContent .card .card-img {
     margin-top: -30px;

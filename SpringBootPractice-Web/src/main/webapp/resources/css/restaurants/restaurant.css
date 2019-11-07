@@ -14,10 +14,19 @@
     /*padding-right: 0;*/
     text-align: right;
 }
-#restaurantItemHeaderButton #restaurantItemUri,
+#restaurantItemHeaderButton #restaurantItemFavorite,
 #restaurantItemHeaderButton #restaurantItemEdit,
 #restaurantItemHeaderButton #restaurantItemDelete {
     border: none;
+}
+
+/* 식당 메뉴, 컨텐트 영역 */
+#restaurantMenu,
+#restaurantItemContent {
+    text-align: center;
+}
+#restaurantMenu .menuName {
+    margin-bottom: 5px;
 }
 
 /* 식당 푸터 영역 */

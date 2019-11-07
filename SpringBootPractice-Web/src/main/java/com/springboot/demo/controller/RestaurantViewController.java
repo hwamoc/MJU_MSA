@@ -1,5 +1,6 @@
 package com.springboot.demo.controller;
 
+import com.springboot.demo.model.Grade;
 import com.springboot.demo.model.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +15,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 import com.springboot.demo.model.Restaurant;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
-import static com.springboot.demo.global.Constants.SERVER_MESSAGE;
-import static com.springboot.demo.global.Constants.createBaseURI;
+
+import static com.springboot.demo.global.Constants.*;
+import static com.springboot.demo.global.UserSession.getUserSession;
 
 /**
  * @Class: 식당 뷰 컨트롤러 클래스
@@ -57,6 +61,8 @@ public class RestaurantViewController {
             mv.setViewName("restaurants/new");
         } else {
             String uri = baseURI + "/restaurant";
+            ;
+            restaurant.setRes_image(getImaSrc(restaurant.getRes_content())); // 썸네일 이미지 세팅
             ResponseEntity<Restaurant> response = restTemplate.postForEntity(uri, restaurant, Restaurant.class);
 
             if (response.getStatusCode().is2xxSuccessful()) {
@@ -78,8 +84,13 @@ public class RestaurantViewController {
         logger.info("getRestaurants()");
 
         String uri = baseURI + "/restaurants";
-        ResponseEntity<List<Restaurant>> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<Restaurant>>() {});
-        List<Restaurant> restaurantList = response.getBody();
+
+        // JSON -> List 변환 에러 (https://medium.com/@dongchimi/json-%ED%8C%8C%EC%8B%B1-%EC%A4%91-%EC%98%A4%EB%A5%98-%EB%AA%A8%EC%9D%8C-a519501ee0c1)
+        // ResponseEntity<List<Restaurant>> response = restTemplate.exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<List<Restaurant>>() {});
+        // List<Restaurant> restaurantList = response.getBody();
+
+        Restaurant[] restaurantList = restTemplate.getForObject(uri, Restaurant[].class);
+        // ResponseEntity<Restaurant[]> restaurantList = restTemplate.getForEntity(uri, Restaurant[].class);
 
         mv.addObject("restaurantList", restaurantList);
         mv.setViewName("restaurants/list");
@@ -97,18 +108,8 @@ public class RestaurantViewController {
         ResponseEntity<Restaurant> response = restTemplate.getForEntity(uri, Restaurant.class);
         Restaurant restaurant = response.getBody();
 
-        // 임시 메뉴 등록
-        Menu menu1 = new Menu(1, "짜장면", 5000);
-        Menu menu2 = new Menu(2, "짬뽕", 5000);
-        Menu menu3 = new Menu(3, "보쌈", 8000);
-        Menu menu4 = new Menu(4, "제육볶음정식", 7000);
-        Menu menu5 = new Menu(5, "쭈꾸미볶음", 7000);
-        mv.addObject("menu1", menu1);
-        mv.addObject("menu2", menu2);
-        mv.addObject("menu3", menu3);
-        mv.addObject("menu4", menu4);
-        mv.addObject("menu5", menu5);
-        // 임시 메뉴 등록
+        // 평점 입력 폼
+        mv.addObject("grade", new Grade());
 
         mv.addObject("restaurant", restaurant);
         mv.setViewName("restaurants/restaurant");
@@ -135,7 +136,7 @@ public class RestaurantViewController {
      * @Method: 식당 수정
      */
     @RequestMapping(value = "/restaurants/{res_index}/edit", method = RequestMethod.PUT)
-    public ModelAndView putEditRestaurant(@PathVariable("res_index") int res_index, @ModelAttribute("post") @Valid Restaurant restaurant, BindingResult result,
+    public ModelAndView putEditRestaurant(@PathVariable("res_index") int res_index, @ModelAttribute("restaurant") @Valid Restaurant restaurant, BindingResult result,
                                           ModelAndView mv, RedirectAttributes rttr) {
         logger.info("putEditRestaurant()");
 
@@ -145,6 +146,7 @@ public class RestaurantViewController {
             mv.addObject(SERVER_MESSAGE, "식당 등록 정보를 확인해주세요.");
             mv.setViewName("restaurants/edit");
         } else {
+            restaurant.setRes_image(getImaSrc(restaurant.getRes_content())); // 썸네일 이미지 세팅
             String uri = baseURI + "/restaurant/" + res_index;
 
             HttpEntity<Restaurant> entity = new HttpEntity<>(restaurant);
@@ -174,6 +176,37 @@ public class RestaurantViewController {
         mv.setViewName("redirect:/restaurants");
         return mv;
     }
+
+    /**
+     * @Method: 평점 등록
+     */
+    @RequestMapping(value = "/restaurants/{res_index}/grades/new", method = RequestMethod.POST)
+    public ModelAndView postGrade(@PathVariable("res_index") int res_index,
+                                  @ModelAttribute("grade") Grade grade, HttpServletRequest request, RedirectAttributes rttr, ModelAndView mv) {
+        logger.info("postGrade()");
+
+        String uri = baseURI + "/restaurant/" + res_index + "/grade";
+        grade.setUser_id(getUserSession(request).getUser_id()); // 로그인 계정의 ID 세팅
+        ResponseEntity<Grade> response = restTemplate.postForEntity(uri, grade, Grade.class);
+
+        if (response.getStatusCode().is2xxSuccessful()) {
+            rttr.addFlashAttribute(SERVER_MESSAGE, "평점이 등록되었습니다.");
+            mv.setViewName("redirect:/restaurants/" + res_index);
+        } else {
+            mv.addObject(SERVER_MESSAGE, "평점 등록 중, 문제가 발생하였습니다.");
+            mv.setViewName("redirect:/restaurants/" + res_index);
+        }
+
+        return mv;
+    }
+
+    /**
+     * @Method: 평점 수정 (평점 등록 조회 후, 수정)
+     */
+
+    /**
+     * @Method: 평점 삭제
+     */
 
 
 

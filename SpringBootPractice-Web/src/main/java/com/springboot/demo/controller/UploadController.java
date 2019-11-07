@@ -50,7 +50,8 @@ public class UploadController {
         if (month < 10) monthStr = "0" + month;
         else monthStr = "" + month;
 
-        String resourceRootPath = File.separator + "home" + File.separator + "ubuntu"; // 웹 서버 리소스 경로
+//        String resourceRootPath = "C:/Users/amelon"; // 로컬 서버 리소스 경로
+        String resourceRootPath = File.separator + "home" + File.separator + "ubuntu"; // 실서버 리소스 경로
         String attachPath = File.separator + "upload" + File.separator + year + "" + monthStr; // 업로드 경로
         String fileUploadPath = resourceRootPath + attachPath; // 최종 경로
         

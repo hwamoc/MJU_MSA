@@ -1,9 +1,15 @@
-// 식당 이름 글자수 검사
-function checkName() {
-    var nameLength = document.getElementById("res_name").value.length;
-    $('#nameLengthCounter').html(" (" + nameLength + " / 50자)");
+$(function () {
+    var ckeditor_config = {
+        resize_enabled: true,
+        height: 500,
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P,
+        filebrowserUploadUrl: "/image-upload"
+    };
 
-    if (nameLength >= 50) {
-        alert("이름은 50자 이내로 작성해주세요.");
-    }
-}
+    CKEDITOR.replace('res_content', ckeditor_config);
+});
+
+$('addRowButton').click(function () {
+
+});
