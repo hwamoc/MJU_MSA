@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.demo.entity.Menu;
 import com.springboot.demo.entity.Restaurant;
-import com.springboot.demo.model.response.CommonResult;
 import com.springboot.demo.repo.MenuJpaRepo;
 import com.springboot.demo.repo.RestaurantJpaRepo;
 import com.springboot.demo.service.ResponseService;

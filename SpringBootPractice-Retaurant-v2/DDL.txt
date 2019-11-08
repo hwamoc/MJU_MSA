@@ -65,7 +65,7 @@ VALUES(4,'베가보쌈', '한식', null ,3);
 
 INSERT INTO `Restaurant_MSA`.menu`
 (`menu_index`,`menu_name`,`menu_price`, `res_index`)
-VALUES(1, '짜장면', 5000, 2);
+VALUES(1, '짜장면', 5000, 1);
 INSERT INTO `Restaurant_MSA`.`menu`
 (`menu_index`,`menu_name`,`menu_price`, `res_index`)
 VALUES(2, '짬뽕', 6000, 2);
