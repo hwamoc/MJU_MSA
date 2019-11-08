@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.demo.entity.Menu;
 import com.springboot.demo.entity.Restaurant;
 import com.springboot.demo.model.response.CommonResult;
+import com.springboot.demo.repo.MenuJpaRepo;
 import com.springboot.demo.repo.RestaurantJpaRepo;
 import com.springboot.demo.service.ResponseService;
 
@@ -30,6 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(value = "/")
 public class RestaurantController {
 	private final RestaurantJpaRepo restaurantJpaRepo;
+	private final MenuJpaRepo menuJpaRepo;
 	private final ResponseService responseService; // 결과를 처리할 Service
 
 	@ApiOperation(value = "식당 조회", notes = "모든 식당을 조회한다")
@@ -76,6 +79,12 @@ public class RestaurantController {
 		
 //		return responseService.getSingleResult(restaurantJpaRepo.save(restaurant));
 		Restaurant newRestaurant = restaurantJpaRepo.save(restaurant);
+		int res_index = newRestaurant.getRes_index();
+		for (Menu m: newRestaurant.getRes_menues()) {
+			m.setRestaurant(newRestaurant);
+		}
+		menuJpaRepo.saveAll(restaurant.getRes_menues());
+		
 		return new ResponseEntity<Restaurant>(newRestaurant, HttpStatus.OK);
 	}
 	
@@ -110,9 +119,9 @@ public class RestaurantController {
 	
 	@ApiOperation(value = "식당 삭제", notes = "res_index로 식당 정보를 삭제한다")
 	@DeleteMapping(value = "/restaurant/{res_index}")
-	public CommonResult delete(@ApiParam(value = "식당 아이디", required = true) @PathVariable int res_index) {
+	public void delete(@ApiParam(value = "식당 아이디", required = true) @PathVariable int res_index) {
 		restaurantJpaRepo.deleteById(res_index);
 		// 성공 결과 정보만 필요한경우 getSuccessResult()를 이용하여 결과를 출력한다.
-		return responseService.getSuccessResult();
+//		return responseService.getSuccessResult();
 	}
 }

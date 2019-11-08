@@ -30,7 +30,7 @@ CREATE TABLE `grade` (
 
 
 CREATE TABLE `menu` (
-  `menu_index` int(11) NOT NULL,
+  `menu_index` int(11) NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(45) DEFAULT NULL,
   `menu_price` varchar(45) DEFAULT NULL,
   `res_index` int(11) DEFAULT NULL,
