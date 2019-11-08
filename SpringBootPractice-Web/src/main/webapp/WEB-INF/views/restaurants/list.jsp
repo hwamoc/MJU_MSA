@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="card-favorite">
-                                <span class="restaurantFavorite" onclick="addFavorite()"><i class="fas fa-star" data-toggle="tooltip" data-placement="top" title="즐겨찾기 추가"></i></span>
+                                <span class="restaurantFavorite" onclick="addFavorite(${restaurant.res_index})"><i class="fas fa-star" data-toggle="tooltip" data-placement="top" title="즐겨찾기 추가"></i></span>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                             </div>
 
                             <div class="card-favorite">
-                                <span class="restaurantFavorite" onclick="addFavorite()"><i class="fas fa-star" data-toggle="tooltip" data-placement="top" title="즐겨찾기 추가" onclick=""></i></span>
+                                <span class="restaurantFavorite" onclick="addFavorite(${restaurant.res_index})"><i class="fas fa-star" data-toggle="tooltip" data-placement="top" title="즐겨찾기 추가" onclick=""></i></span>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                             </div>
 
                             <div class="card-favorite">
-                                <span class="restaurantFavorite" onclick="addFavorite()"><i class="fas fa-star" data-toggle="tooltip" data-placement="top" title="즐겨찾기 추가" onclick=""></i></span>
+                                <span class="restaurantFavorite" onclick="addFavorite(${restaurant.res_index})"><i class="fas fa-star" data-toggle="tooltip" data-placement="top" title="즐겨찾기 추가" onclick=""></i></span>
                             </div>
                         </div>
                     </div>
