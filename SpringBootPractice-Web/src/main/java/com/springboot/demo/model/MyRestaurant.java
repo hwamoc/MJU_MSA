@@ -12,10 +12,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class MyRestaurant implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int index;
+    private int res_index;
     private String user_id;
-    private String res_name;
-    private String res_category;
-    private int res_grade;
-    private int res_expected_minutes;
 }
