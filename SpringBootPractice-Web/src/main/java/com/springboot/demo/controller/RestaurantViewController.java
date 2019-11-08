@@ -167,14 +167,17 @@ public class RestaurantViewController {
      * @Method: 식당 삭제
      */
     @RequestMapping(value = "/restaurants/{res_index}", method = RequestMethod.DELETE)
-    public ModelAndView deleteRestaurant(@PathVariable("res_index") int res_index, ModelAndView mv) {
+    public int deleteRestaurant(@PathVariable("res_index") int res_index, ModelAndView mv) {
         logger.info("deleteRestaurant()");
 
         String uri = baseURI + "/restaurant/" + res_index;
         ResponseEntity<Restaurant> response = restTemplate.exchange(uri, HttpMethod.DELETE, null, Restaurant.class);
 
-        mv.setViewName("redirect:/restaurants");
-        return mv;
+        if (response.getStatusCode().is2xxSuccessful()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     /**
