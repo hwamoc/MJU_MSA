@@ -101,6 +101,9 @@ public class RestaurantController {
 		modifiedRestaurant.setRes_grade(restaurant.getRes_grade());
 		modifiedRestaurant.setRes_expected_minutes(restaurant.getRes_expected_minutes());
 		modifiedRestaurant.setRes_menues(restaurant.getRes_menues());
+		modifiedRestaurant.setRes_content(restaurant.getRes_content());
+		modifiedRestaurant.setRes_image(restaurant.getRes_image());
+		restaurantJpaRepo.save(modifiedRestaurant);
 		
 		return new ResponseEntity<Restaurant>(modifiedRestaurant, HttpStatus.OK);
     }

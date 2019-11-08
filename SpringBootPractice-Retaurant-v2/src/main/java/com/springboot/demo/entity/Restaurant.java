@@ -49,5 +49,9 @@ public class Restaurant {
     private List<Menu> res_menues;
     @Column(nullable = true, length = 11) 
     private Integer res_expected_minutes;
+    @Column(nullable = true, length = 500) 
+    private String res_content; 
+    @Column(nullable = true, length = 200) 
+    private String res_image; 
     
 }

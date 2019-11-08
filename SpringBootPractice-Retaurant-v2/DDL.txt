@@ -8,9 +8,15 @@ CREATE TABLE `restaurant` (
   `res_grade` int(11) DEFAULT NULL,
   `res_menu` varchar(200) DEFAULT NULL,
   `res_expected_minutes` int(11) DEFAULT NULL,
+  'res_content' varchar(500) DEFAULT NULL,
+  'res_image' varchar(200) DEFAULT NULL,
   PRIMARY KEY (`res_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 //ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+//
+alter table restaurant add res_content varchar(500) DEFAULT NULL;
+alter table restaurant add res_image varchar(200) DEFAULT NULL;
 
 CREATE TABLE `grade` (
   `grade_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -57,15 +63,15 @@ INSERT INTO `Restaurant_MSA`.`restaurant`
 VALUES(4,'베가보쌈', '한식', null ,3);
 
 
-INSERT INTO `Restaurant_MSA`.`Menu`
+INSERT INTO `Restaurant_MSA`.menu`
 (`menu_index`,`menu_name`,`menu_price`, `res_index`)
 VALUES(1, '짜장면', 5000, 2);
-INSERT INTO `Restaurant_MSA`.`Menu`
+INSERT INTO `Restaurant_MSA`.`menu`
 (`menu_index`,`menu_name`,`menu_price`, `res_index`)
 VALUES(2, '짬뽕', 6000, 2);
-INSERT INTO `Restaurant_MSA`.`Menu`
+INSERT INTO `Restaurant_MSA`.`menu`
 (`menu_index`,`menu_name`,`menu_price`, `res_index`)
 VALUES(3, '보쌈', 7000, 4);
-INSERT INTO `Restaurant_MSA`.`Menu`
+INSERT INTO `Restaurant_MSA`.`menu`
 (`menu_index`,`menu_name`,`menu_price`, `res_index`)
 VALUES(4, '제육볶음정식', 7000, 1);
